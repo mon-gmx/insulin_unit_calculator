@@ -1,0 +1,47 @@
+{% from 'bootstrap5/form.html' import render_form %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <br>
+    <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+      {% if message['type'] == 'error' %}
+      <div class="alert alert-danger" role="alert">
+        {{ message['value'] }}
+      </div>
+      {% elif message['type'] == 'success' %}
+      <div class="alert alert-success" role="alert">
+        {{ message['value'] }}
+      </div>
+      {% endif %}
+      {% if warning %}
+      <br>
+      <div class="alert alert-warning" role="alert">
+        {{ warning }}
+      </div>
+      {% endif %}
+      <h1 class="pt-5 pb-2">Data collection for glucose stats</h1>
+      {{ render_form(form) }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+      {% if insulin_units != None %}
+      <br>
+      <div class="alert alert-info">
+        Recommended insulin units: {{ insulin_units }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <br>
+    <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+      <a href="https://docs.google.com/spreadsheets/d/{{ spreadsheet_id }}/edit#gid=0">My Spreadsheet</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
