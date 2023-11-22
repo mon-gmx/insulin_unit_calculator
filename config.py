@@ -1,4 +1,6 @@
-{
+# GET THIS FROM https://console.cloud.google.com/apis/credentials?project=<McY PROJECT>
+
+google_sheet_credentials = {
     "installed":{
         "client_id":"CLIENT ID",
         "project_id":"MY PROJECT",
@@ -10,4 +12,8 @@
     }
 }
 
-# GET THIS FROM https://console.cloud.google.com/apis/credentials?project=<MY PROJECT>
+google_spreadsheet_id = ""
+google_sheet_update = True
+
+bedtime_units = 18
+midnight_units = 0

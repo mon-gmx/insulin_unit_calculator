@@ -1,102 +1,102 @@
 [
     {
-        "min": 10,
-        "max": 20,
+        "min": 8,
+        "max": 16,
         "units": 1
     },
     {
-        "min": 20,
-        "max": 30,
+        "min": 16,
+        "max": 24,
         "units": 2
     },
     {
-        "min": 30,
-        "max": 40,
+        "min": 24,
+        "max": 32,
         "units": 3
     },
     {
-        "min": 40,
-        "max": 50,
+        "min": 32,
+        "max": 40,
         "units": 4
     },
     {
-        "min": 50,
-        "max": 60,
+        "min": 40,
+        "max": 48,
         "units": 5
     },
     {
-        "min": 60,
-        "max": 70,
+        "min": 48,
+        "max": 56,
         "units": 6
     },
     {
-        "min": 70,
-        "max": 80,
+        "min": 56,
+        "max": 64,
         "units": 7
     },
     {
-        "min": 80,
-        "max": 90,
+        "min": 64,
+        "max": 72,
         "units": 8
     },
     {
-        "min": 90,
-        "max": 100,
+        "min": 72,
+        "max": 80,
         "units": 9
     },
     {
-        "min": 100,
-        "max": 110,
+        "min": 80,
+        "max": 88,
         "units": 10
     },
     {
-        "min": 110,
-        "max": 120,
+        "min": 88,
+        "max": 96,
         "units": 11
     },
     {
-        "min": 120,
-        "max": 130,
+        "min": 96,
+        "max": 104,
         "units": 12
     },
     {
-        "min": 130,
-        "max": 140,
+        "min": 104,
+        "max": 112,
         "units": 13
     },
     {
-        "min": 130,
-        "max": 140,
+        "min": 112,
+        "max": 120,
         "units": 14
     },
     {
-        "min": 140,
-        "max": 150,
+        "min": 120,
+        "max": 128,
         "units": 15
     },
     {
-        "min": 150,
-        "max": 160,
+        "min": 128,
+        "max": 136,
         "units": 16
     },
     {
-        "min": 160,
-        "max": 170,
+        "min": 136,
+        "max": 144,
         "units": 17
     },
     {
-        "min": 170,
-        "max": 180,
+        "min": 144,
+        "max": 152,
         "units": 18
     },
     {
-        "min": 180,
-        "max": 190,
+        "min": 152,
+        "max": 160,
         "units": 19
     },
     {
-        "min": 190,
-        "max": 200,
+        "min": 160,
+        "max": 168,
         "units": 20
     }
 ]

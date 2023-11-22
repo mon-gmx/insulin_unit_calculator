@@ -1,8 +1,10 @@
 import json
 from typing import Optional
 
-MIDNIGHT = 0
-BEDTIME = 20
+from .config import (bedtime_units, midnight_units)
+from .logger import get_logger
+
+log = get_logger(__name__)
 
 
 def get_units_from_tabular(metric: str, value: float) -> Optional[int]:
@@ -13,6 +15,7 @@ def get_units_from_tabular(metric: str, value: float) -> Optional[int]:
                 if value >= item["min"] and value < item["max"]:
                     return item["units"]
     except (IOError, json.JSONDecodeError, ValueError) as error:
+        log.error(f"Read of limits failed: {error}")
         return None
 
 
@@ -27,13 +30,15 @@ def get_insulin_units(
         return units
     if special:
         if special.lower() == "midnight":
-            return MIDNIGHT
+            return midnight_units
         elif special.lower() == "bedtime":
-            return BEDTIME
+            return bedtime_units
 
     for item in ("carbs", "sugar"):
         tabular_units = get_units_from_tabular(metric=item, value=vars().get(item))
+        log.info(tabular_units)
         if tabular_units is None:
+            log.warning("Tabular units did not load")
             return None
         else:
             units += tabular_units

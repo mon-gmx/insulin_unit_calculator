@@ -6,18 +6,21 @@ from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
 
 from .calculator import get_insulin_units
+from .config import (google_sheet_update,
+                     google_spreadsheet_id)
 from .google_sheet import insert_values_in_sheet
+from .logger import get_logger
 from .models import InputForm
+
+log = get_logger(__name__)
 
 app = Flask(__name__)
 app_key = secrets.token_urlsafe(16)
 app.secret_key = app_key
+app.logger = log
 
 bootstrap = Bootstrap5(app)
 csrf = CSRFProtect(app)
-
-SPREADSHEET_ID = "<SPREADSHEET ID FROM GOOGLE SHEETS URL>"
-
 
 def valid_date(value: datetime.date):
     return isinstance(value, datetime.date)
@@ -70,6 +73,7 @@ def index():
             sugar=bg,
             special=special
         )
+        app.logger.info(f"Insulin units to use: {insulin_units}")
 
         # edge cases as we want inserted in the spreadsheet
         if not message:
@@ -94,28 +98,28 @@ def index():
             composed_time = f"{date} {time}"
 
             # spreadsheet update results
-
-            if insert_values_in_sheet(
-                data_to_insert=[
-                    date,
-                    time,
-                    composed_time,
-                    carbs,
-                    bg
-                ],
-                spreadseet_id=SPREADSHEET_ID,
-            ):
-                message = {"type": "success", "value": "Values inserted correctly"}
-            else:
-                message = {
-                    "type": "error",
-                    "value": "Values could not be inserted in spreadsheet",
-                }
+            if google_sheet_update:
+                if insert_values_in_sheet(
+                    data_to_insert=[
+                        date,
+                        time,
+                        composed_time,
+                        carbs,
+                        bg
+                    ],
+                    spreadseet_id=google_spreadsheet_id,
+                ):
+                    message = {"type": "success", "value": "Values inserted correctly"}
+                else:
+                    message = {
+                        "type": "error",
+                        "value": "Values could not be inserted in spreadsheet",
+                    }
 
     return render_template(
         "index.html",
         form=form,
-        spreadsheet_id=SPREADSHEET_ID,
+        spreadsheet_id=google_spreadsheet_id,
         message=message,
         warning=warning,
         insulin_units=insulin_units

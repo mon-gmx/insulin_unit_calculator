@@ -1,5 +1,9 @@
 import os
+import json
 from typing import List
+
+from .config import google_sheet_credentials
+from .logger import get_logger
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -8,6 +12,17 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+
+log = get_logger(__name__)
+
+def config_to_credentials():
+    try:
+        with open("./credentials.json", "w+") as credentials:
+            json.dump(credentials_config)
+            return True
+    except (IOError, json.JSONDecodeError):
+        log.error("failed to load credentials into a file to be used")
+    return False
 
 
 def append_values(
@@ -18,18 +33,21 @@ def append_values(
 ):
     try:
         creds = None
-        if os.path.exists("token.json"):
+        if os.path.exists("./token.json"):
             creds = Credentials.from_authorized_user_file("token.json", SCOPES)
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
+                if not config_to_credentials():
+                    log.error("failed to load config into credentials json file")
+                    return _, False
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    "credentials.json", SCOPES
+                    "./credentials.json", SCOPES
                 )
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
-            with open("token.json", "w") as token:
+            with open("./token.json", "w") as token:
                 token.write(creds.to_json())
         service = build("sheets", "v4", credentials=creds)
 
@@ -54,7 +72,7 @@ def append_values(
 
 
 def insert_values_in_sheet(data_to_insert: List, spreadseet_id: str):
-    print(data_to_insert)
+    log.debug(data_to_insert)
     success = False
     if data_to_insert:
         range_name = "Tracking Main!A1"
