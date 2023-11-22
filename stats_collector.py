@@ -49,6 +49,8 @@ def index():
         time = form.time.data
         carbs = form.carbs.data
         bg = form.bg.data
+        special = form.special.data
+
         if not valid_date(date):
             message = {
                 "type": "error",
@@ -104,6 +106,8 @@ def index():
                         "type": "error",
                         "value": "Values could not be inserted in spreadsheet",
                     }
+            else:
+                log.warning("No data will be inserted in the spreadsheet")
 
     return render_template(
         "index.html",

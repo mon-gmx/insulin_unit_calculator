@@ -25,6 +25,7 @@ def get_insulin_units(
     units = 0
     if not carbs or not sugar:
         return units
+    log.info(f"Special is: {special}")
     if special:
         if special.lower() == "midnight":
             return midnight_units
