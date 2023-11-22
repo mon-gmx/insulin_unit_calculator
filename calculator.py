@@ -1,10 +1,19 @@
 import json
 from typing import Optional
 
-from config import bedtime_units, midnight_units
+from config import (bedtime_units,
+                    default_carbs_ratio,
+                    midnight_units)
 from logger import get_logger
 
 log = get_logger(__name__)
+
+
+def get_units_from_ratio(value: int, ratio: int, limit: int = 20) -> int:
+    for i in range(1, limit):
+        if value >= (i * ratio) and value < ((i + 1) * ratio):
+            return i
+    return limit
 
 
 def get_units_from_tabular(metric: str, value: float) -> Optional[int]:
@@ -20,7 +29,10 @@ def get_units_from_tabular(metric: str, value: float) -> Optional[int]:
 
 
 def get_insulin_units(
-    carbs: int = 0, sugar: int = 0, special: Optional[str] = None
+    carbs: int = 0,
+    sugar: int = 0,
+    carbs_ratio: int = default_carbs_ratio,
+    special: Optional[str] = None
 ) -> Optional[int]:
     units = 0
     if not carbs or not sugar:
@@ -32,12 +44,12 @@ def get_insulin_units(
         elif special.lower() == "bedtime":
             return bedtime_units
 
-    for item in ("carbs", "sugar"):
-        tabular_units = get_units_from_tabular(metric=item, value=vars().get(item))
-        log.info(tabular_units)
-        if tabular_units is None:
-            log.warning("Tabular units did not load")
-            return None
-        else:
-            units += tabular_units
+    units += get_units_from_ratio(carbs, carbs_ratio)
+    log.info(units)
+    sugar_tabular_units = get_units_from_tabular(metric="sugar", value=sugar)
+    if sugar_tabular_units is None:
+        log.warning("Tabular units did not load")
+        return None
+    else:
+        units += sugar_tabular_units
     return units

@@ -6,7 +6,9 @@ from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
 
 from calculator import get_insulin_units
-from config import google_sheet_update, google_spreadsheet_id
+from config import (default_carbs_ratio,
+                    google_sheet_update,
+                    google_spreadsheet_id)
 from google_sheet import insert_values_in_sheet
 from logger import get_logger
 from models import InputForm
@@ -50,6 +52,7 @@ def index():
         carbs = form.carbs.data
         bg = form.bg.data
         special = form.special.data
+        carbs_ratio = form.carbs_ratio.data
 
         if not valid_date(date):
             message = {
@@ -70,7 +73,12 @@ def index():
             }
 
         # getting the calculator to find the insulin units
-        insulin_units = get_insulin_units(carbs=carbs, sugar=bg, special=special)
+        insulin_units = get_insulin_units(
+            carbs=carbs,
+            sugar=bg,
+            carbs_ratio=carbs_ratio,
+            special=special
+        )
         app.logger.info(f"Insulin units to use: {insulin_units}")
 
         # edge cases as we want inserted in the spreadsheet
@@ -107,7 +115,7 @@ def index():
                         "value": "Values could not be inserted in spreadsheet",
                     }
             else:
-                log.warning("No data will be inserted in the spreadsheet")
+                app.logger.warning("No data will be inserted in the spreadsheet")
 
     return render_template(
         "index.html",

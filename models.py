@@ -1,5 +1,7 @@
 import datetime
 
+from config import default_carbs_ratio
+
 from flask_wtf import FlaskForm
 from wtforms import (DateField, IntegerField, SelectField, SubmitField,
                      TimeField)
@@ -21,5 +23,10 @@ class InputForm(FlaskForm):
     )
     special = SelectField(
         label="Special collection event", choices=["", "midnight", "bedtime"]
+    )
+    carbs_ratio = IntegerField(
+        label="Carbs Ratio to Units",
+        validators=[InputRequired(message="This value cannot be zero")],
+        default=default_carbs_ratio
     )
     submit = SubmitField("Submit")

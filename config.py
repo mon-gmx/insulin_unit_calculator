@@ -15,5 +15,6 @@ google_sheet_credentials = {
 google_spreadsheet_id = ""
 google_sheet_update = True
 
+default_carbs_ratio = 8
 bedtime_units = 18
 midnight_units = 0
