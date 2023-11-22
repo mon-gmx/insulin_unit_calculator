@@ -1,9 +1,6 @@
-import os
 import json
+import os
 from typing import List
-
-from .config import google_sheet_credentials
-from .logger import get_logger
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -11,9 +8,13 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+from config import google_sheet_credentials
+from logger import get_logger
+
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 log = get_logger(__name__)
+
 
 def config_to_credentials():
     try:

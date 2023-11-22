@@ -5,12 +5,11 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
 
-from .calculator import get_insulin_units
-from .config import (google_sheet_update,
-                     google_spreadsheet_id)
-from .google_sheet import insert_values_in_sheet
-from .logger import get_logger
-from .models import InputForm
+from calculator import get_insulin_units
+from config import google_sheet_update, google_spreadsheet_id
+from google_sheet import insert_values_in_sheet
+from logger import get_logger
+from models import InputForm
 
 log = get_logger(__name__)
 
@@ -21,6 +20,7 @@ app.logger = log
 
 bootstrap = Bootstrap5(app)
 csrf = CSRFProtect(app)
+
 
 def valid_date(value: datetime.date):
     return isinstance(value, datetime.date)
@@ -66,33 +66,28 @@ def index():
                 "type": "error",
                 "value": "Invalid value was passed for blood glucose leves (BG)",
             }
-        
+
         # getting the calculator to find the insulin units
-        insulin_units = get_insulin_units(
-            carbs=carbs,
-            sugar=bg,
-            special=special
-        )
+        insulin_units = get_insulin_units(carbs=carbs, sugar=bg, special=special)
         app.logger.info(f"Insulin units to use: {insulin_units}")
 
         # edge cases as we want inserted in the spreadsheet
         if not message:
             if carbs > 200:
-                warning="TOO MANY CARBS! CHECK VALUES"
-        
+                warning = "TOO MANY CARBS! CHECK VALUES"
+
             if bg < 70:
-                warning="SUGAR IS LOW, CARBS NEEDED TO COMPENSATE!"
-            
+                warning = "SUGAR IS LOW, CARBS NEEDED TO COMPENSATE!"
+
             if bg > 630:
-                warning="SUGAR IS DANGEROUSLY HIGH! GET TO ER"
+                warning = "SUGAR IS DANGEROUSLY HIGH! GET TO ER"
             date = datetime.datetime.strftime(date, "%m/%d/%Y")
-            time = time.isoformat(timespec='auto')
+            time = time.isoformat(timespec="auto")
             split_time = time.split(":")
             if int(split_time[0]) < 4:
                 carbs = "MIDNIGHT"
-            elif (
-                (int(split_time[1]) == 20 and int(split_time[1]) >= 30) or
-                (int(split_time[0]) > 20)
+            elif (int(split_time[1]) == 20 and int(split_time[1]) >= 30) or (
+                int(split_time[0]) > 20
             ):
                 carbs = "BEDTIME"
             composed_time = f"{date} {time}"
@@ -100,13 +95,7 @@ def index():
             # spreadsheet update results
             if google_sheet_update:
                 if insert_values_in_sheet(
-                    data_to_insert=[
-                        date,
-                        time,
-                        composed_time,
-                        carbs,
-                        bg
-                    ],
+                    data_to_insert=[date, time, composed_time, carbs, bg],
                     spreadseet_id=google_spreadsheet_id,
                 ):
                     message = {"type": "success", "value": "Values inserted correctly"}
@@ -122,5 +111,5 @@ def index():
         spreadsheet_id=google_spreadsheet_id,
         message=message,
         warning=warning,
-        insulin_units=insulin_units
+        insulin_units=insulin_units,
     )

@@ -1,8 +1,10 @@
 import datetime
 
 from flask_wtf import FlaskForm
-from wtforms import DateField, IntegerField, SelectField, SubmitField, TimeField
+from wtforms import (DateField, IntegerField, SelectField, SubmitField,
+                     TimeField)
 from wtforms.validators import InputRequired
+
 
 class InputForm(FlaskForm):
     date = DateField(label="Date", default=datetime.date.today)
@@ -10,15 +12,14 @@ class InputForm(FlaskForm):
     carbs = IntegerField(
         label="Carbs (g)",
         validators=[InputRequired(message="This value cannot be zero")],
-        default=0
+        default=0,
     )
     bg = IntegerField(
         label="BG (mg/dL)",
         validators=[InputRequired(message="This value cannot be zero")],
-        default=70
+        default=70,
     )
     special = SelectField(
-        label="Special collection event",
-        choices=["", "midnight", "bedtime"]
+        label="Special collection event", choices=["", "midnight", "bedtime"]
     )
     submit = SubmitField("Submit")

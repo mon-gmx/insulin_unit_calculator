@@ -1,8 +1,8 @@
 import json
 from typing import Optional
 
-from .config import (bedtime_units, midnight_units)
-from .logger import get_logger
+from config import bedtime_units, midnight_units
+from logger import get_logger
 
 log = get_logger(__name__)
 
@@ -20,10 +20,7 @@ def get_units_from_tabular(metric: str, value: float) -> Optional[int]:
 
 
 def get_insulin_units(
-    carbs: int = 0,
-    sugar: int = 0,
-    special: Optional[str] = None
-
+    carbs: int = 0, sugar: int = 0, special: Optional[str] = None
 ) -> Optional[int]:
     units = 0
     if not carbs or not sugar:
