@@ -1,7 +1,7 @@
 function getUnits(carbs, sugar) {
 
   let units = 0;
-  let bedtime_units = 20;
+  let bedtime_units = 18;
   
   // if no data is present no data should return
   if ((carbs == null && sugar == null) || (carbs == 0 && sugar == 0)) {
@@ -43,45 +43,45 @@ function getUnits(carbs, sugar) {
 
   */
   
-  if (carbs >= 10 && carbs < 20) {
+  if (carbs >= 8 && carbs < 16) {
     units += 1;
-  } else if (carbs >= 20 && carbs < 30) {
+  } else if (carbs >= 16 && carbs < 24) {
     units += 2;
-  } else if (carbs >= 30 && carbs < 40) {
+  } else if (carbs >= 24 && carbs < 32) {
     units += 3;
-  } else if (carbs >= 40 && carbs < 50) {
+  } else if (carbs >= 32 && carbs < 40) {
     units += 4;
-  } else if (carbs >= 50 && carbs < 60) {
+  } else if (carbs >= 40 && carbs < 48) {
     units += 5;
-  } else if (carbs >= 60 && carbs < 70) {
+  } else if (carbs >= 48 && carbs < 56) {
     units += 6;
-  } else if (carbs >= 70 && carbs < 80) {
+  } else if (carbs >= 56 && carbs < 64) {
     units += 7;
-  } else if (carbs >= 80 && carbs < 90) {
+  } else if (carbs >= 64 && carbs < 72) {
     units += 8;
-  } else if (carbs >= 90 && carbs < 100) {
+  } else if (carbs >= 72 && carbs < 80) {
     units += 9;
-  } else if (carbs >= 100 && carbs < 110) {
+  } else if (carbs >= 80 && carbs < 88) {
     units += 10;
-  } else if (carbs >= 110 && carbs < 120) {
+  } else if (carbs >= 88 && carbs < 96) {
     units += 11;
-  } else if (carbs >= 120 && carbs < 130) {
+  } else if (carbs >= 96 && carbs < 104) {
     units += 12;
-  } else if (carbs >= 130 && carbs < 140) {
+  } else if (carbs >= 104 && carbs < 112) {
     units += 13;
-  } else if (carbs >= 140 && carbs < 150) {
+  } else if (carbs >= 112 && carbs < 120) {
     units += 14;
-  } else if (carbs >= 150 && carbs < 160) {
+  } else if (carbs >= 120 && carbs < 128) {
     units += 15;
-  } else if (carbs >= 160 && carbs < 170) {
+  } else if (carbs >= 128 && carbs < 136) {
     units += 16;
-  } else if (carbs >= 170 && carbs < 180) {
+  } else if (carbs >= 136 && carbs < 144) {
     units += 17;
-  } else if (carbs >= 180 && carbs < 190) {
+  } else if (carbs >= 144 && carbs < 152) {
     units += 18;
-  } else if (carbs >= 190 && carbs < 200) {
+  } else if (carbs >= 152 && carbs < 160) {
     units += 19;
-  } else if(carbs == 200) {
+  } else if(carbs == 160) {
     units += 20;
   }
 
