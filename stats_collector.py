@@ -93,16 +93,10 @@ def index():
                 warning = "SUGAR IS DANGEROUSLY HIGH! GET TO ER"
             date = datetime.datetime.strftime(date, "%m/%d/%Y")
             time = time.isoformat(timespec="auto")
-            split_time = time.split(":")
-            if int(split_time[0]) < 4:
-                carbs = "MIDNIGHT"
-            elif (int(split_time[1]) == 20 and int(split_time[1]) >= 30) or (
-                int(split_time[0]) > 20
-            ):
-                carbs = "BEDTIME"
-            composed_time = f"{date} {time}"
 
             # spreadsheet update results
+            if special:
+                carbs = special
             if google_sheet_update:
                 if insert_values_in_sheet(
                     data_to_insert=[date, time, composed_time, carbs, bg],
