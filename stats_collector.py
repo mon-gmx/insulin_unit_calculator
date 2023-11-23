@@ -99,7 +99,7 @@ def index():
                 carbs = special
             if google_sheet_update:
                 if insert_values_in_sheet(
-                    data_to_insert=[date, time, composed_time, carbs, bg],
+                    data_to_insert=[date, time, f"{date} {time}", carbs, bg],
                     spreadseet_id=google_spreadsheet_id,
                 ):
                     message = {"type": "success", "value": "Values inserted correctly"}

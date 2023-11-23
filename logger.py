@@ -1,6 +1,6 @@
 import logging
 
-logging.basicConfig()
+logging.basicConfig(level=logging.INFO)
 
 
 def get_logger(module: str):
