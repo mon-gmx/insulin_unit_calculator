@@ -35,7 +35,7 @@ def get_insulin_units(
     special: Optional[str] = None
 ) -> Optional[int]:
     units = 0
-    if not carbs or not sugar:
+    if not carbs and not sugar:
         return units
     log.info(f"Special is: {special}")
     if special:

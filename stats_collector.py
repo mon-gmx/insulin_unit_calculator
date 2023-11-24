@@ -96,7 +96,7 @@ def index():
 
             # spreadsheet update results
             if special:
-                carbs = special
+                carbs = special.upper()
             if google_sheet_update:
                 if insert_values_in_sheet(
                     data_to_insert=[date, time, f"{date} {time}", carbs, bg],

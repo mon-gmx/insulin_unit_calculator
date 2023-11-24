@@ -16,11 +16,11 @@ function getUnits(carbs, sugar) {
   
   */
   
-  if (carbs == "MIDNIGHT") {
+  if (carbs == "MIDNIGHT" || carbs == "midnight") {
     return 0;
   }
 
-  if (carbs == "BEDTIME") {
+  if (carbs == "BEDTIME" || carbs == "bedtime") {
     return bedtime_units;
   }
 
@@ -28,7 +28,7 @@ function getUnits(carbs, sugar) {
     return "TOO MANY CARBS! CHECK VALUES";
   }
   
-  if (sugar < 70 || sugar == "LOW") {
+  if (sugar < 70 || sugar == "LOW" || sugar == "low") {
     return "SUGAR IS LOW, CARBS NEEDED TO COMPENSATE!";
   }
 
