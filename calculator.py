@@ -39,9 +39,9 @@ def get_insulin_units(
         return units
     log.info(f"Special is: {special}")
     if special:
-        if special.lower() == "midnight":
+        if "midnight" in special.lower():
             return midnight_units
-        elif special.lower() == "bedtime":
+        elif "bedtime" in special.lower():
             return bedtime_units
 
     units += get_units_from_ratio(carbs, carbs_ratio)
