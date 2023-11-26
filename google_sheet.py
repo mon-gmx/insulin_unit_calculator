@@ -19,7 +19,7 @@ log = get_logger(__name__)
 def config_to_credentials():
     try:
         with open("./credentials.json", "w+") as credentials:
-            json.dump(credentials_config)
+            json.dump(google_sheet_credentials, credentials)
             return True
     except (IOError, json.JSONDecodeError):
         log.error("failed to load credentials into a file to be used")
