@@ -5,3 +5,7 @@ This is a simple calculator based on carb intake and sugar levels. I have no exp
 This UI will offer a simple calculator and a way to collect data using google sheets as data layer, so actually all credit goes to google APIs where collective reading and the ability to use a spreadsheet via browser or my own service is possible.
 
 Interested in using it? Open an issue and explain your need, I will be glad to help.
+
+<hr/>
+
+It's been 10 months since my kid got diagnosed with T1D, since then we have onboarded to more sophisticated tools and devices, I am no longer needing this but keeping it as a reminder that life can take a turn in a matter of seconds and on how grateful I am with how life equipped us to deal with that nasty disease. 💙
