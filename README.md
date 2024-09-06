@@ -8,4 +8,4 @@ Interested in using it? Open an issue and explain your need, I will be glad to h
 
 <hr/>
 
-It's been 10 months since my kid got diagnosed with T1D, since then we have onboarded to more sophisticated tools and devices, I am no longer needing this but keeping it as a reminder that life can take a turn in a matter of seconds and on how grateful I am with how life equipped us to deal with that nasty disease. 💙
+It's been 10 months since my kid got diagnosed with T1D, since then we have onboarded to more sophisticated tools and devices, I am no longer needing this but keeping it as a reminder that life can take a turn in a matter of seconds and on how grateful I am with how life itself equipped us to deal with that nasty disease. 💙
